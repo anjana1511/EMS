@@ -65,7 +65,7 @@ EMS
               <i class="nc-icon nc-bank"></i>
               <p>Dashboard</p>
             </a>
-          </li>
+          </li>									@if(Auth::user()->hasRole('admin'))
             <li class="nav-item btn-rotate dropdown">
 		                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="nc-icon nc-globe"></i>Manage Location
@@ -97,15 +97,15 @@ EMS
                                     <a class="dropdown-item" href="{{ route('assign_role') }}">
                                         {{ __('Assign Role-Permission') }}
                                     </a>
-          </li>          		  
+          </li>@endif       		  
 		  <li class="nav-item btn-rotate dropdown">
 		    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="nc-icon nc-icon nc-tile-56"></i>System Managment
                   
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-			<a class="dropdown-item" href="{{ route('division') }}">
-                                        {{ __('Manage Division') }}
+			<a class="dropdown-item" href="{{ route('designation') }}">
+                                        {{ __('Manage Designation') }}
                                     </a>
                                     <a class="dropdown-item" href="{{ route('dept') }}">
                                         {{ __('Manage Department') }}
@@ -123,22 +123,22 @@ EMS
                   
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                  <a class="dropdown-item" href="{{ route('salary') }}">
+                                     @if(Auth::user()->hasRole('admin'))
+                                    <a class="dropdown-item" href="{{ route('salary') }}">
                                         {{ __('Manage Salary') }}
                                     </a>
                                    <a class="dropdown-item" href="{{ route('managesalary') }}">
                                         {{ __('Salary details') }}
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('salarylist') }}">
-                                        {{ __('Employee salary list') }}
-                                    </a>
                                     <a class="dropdown-item" href="{{ route('Advancepayment') }}">
                                         {{ __('Advance payment') }}
                                     </a>
-                                    <a class="dropdown-item" href="">
-                                        {{ __('Generate payslip') }}
+                                    @endif
+                                   <a class="dropdown-item" href="{{ route('salarylist') }}">
+                                        {{ __('Employee salary list') }}
                                     </a>
-                                 
+
+                                                                   
           </li>
           <li class="nav-item btn-rotate dropdown">
 		    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -161,9 +161,10 @@ EMS
                   
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-      <a class="dropdown-item" href="{{ route('leavetype') }}">
+                @if(Auth::user()->hasRole('admin'))
+                                    <a class="dropdown-item" href="{{ route('leavetype') }}">
                                         {{ __('Manage Leave Type') }}
-                                    </a>
+                                    </a> @endif
                                     <a class="dropdown-item" href="{{ route('leave') }}">
                                       Leave Apply
                                     </a>
@@ -177,12 +178,14 @@ EMS
                                         {{ __('Pending Leaves') }}
                                     </a> 
           </li>
+          @if(Auth::user()->hasRole('admin'))
 		  <li>
             <a href="{{ route('sendemail') }}">
               <i class="nc-icon nc-bank"></i>
               <p>Mails</p>
             </a>
           </li>
+          @endif
            <li>
             <a href="{{ url('localization/en') }}">
               <i class="nc-icon nc-globe"></i>

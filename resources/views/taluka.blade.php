@@ -1,3 +1,4 @@
+@if(Auth::user()->hasRole('admin'))
 @extends('layouts.app')
 @section('content')
 
@@ -331,3 +332,4 @@ jQuery(document).ready(function ()
 
 </script>
 @endsection
+@endif

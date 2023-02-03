@@ -3,7 +3,7 @@
 @section('content')
       <div class="content">
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
 				<h5 class="card-title">User Profile</h5>
@@ -15,6 +15,12 @@
                 @if(session()->has('message'))
                         <script  type="application/javascript">
                         swal(" {{ session()->get('message') }}", "You clicked the button!", "success")
+                        </script>
+
+                    @endif
+                    @if(session()->has('error'))
+                        <script  type="application/javascript">
+                        swal(" {{ session()->get('error') }}", "You clicked the button!", "success")
                         </script>
 
                     @endif
@@ -40,45 +46,11 @@
 
            <td width="50%">
            <br>
-           <input type="text" class="form-control" name="username" id="username" value="{{  Auth::user()->name  }}">
+           <input type="hidden" class="form-control" name="username" id="username" value="{{  Auth::user()->name  }}">
            </td>
            <td>
            <br>
-           <input type="text" class="form-control" name="email" id="email" value="{{ Auth::user()->email }}" readonly="">
-           </td>
-        </tr>
-
-        <tr>
-           <td width="50%">
-           <br>
-           <select name="state_id" id="state_id" class="form-control">
-             <option value="0">Select State</option>
-             @foreach($statedata as $item)
-                                        <option value="{{ $item->state_id }}">{{ $item->state_name }}</option>
-                                    @endforeach
-
-           </select>
-           </td>
-           <td width="50%">
-           <br>
-           <select name="dist_id" id="dist_id" class="form-control">
-             <option value="0">Select District</option>
-             
-            </select>
-           </td>
-        </tr>
-        <tr>
-           <td width="50%">
-           <br>
-           <select name="taluka_id" id="taluka_id" class="form-control">
-             <option value="0">Select Taluka</option>
-           </select>
-           </td>
-           <td width="50%">
-           <br>
-           <select name="village_id" id="village_id" class="form-control">
-             <option value="1">Select Village</option>
-           </select>
+           <input type="hidden" class="form-control" name="email" id="email" value="{{ Auth::user()->email }}" readonly="">
            </td>
         </tr>
         <tr>

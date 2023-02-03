@@ -9,7 +9,7 @@ use App\User;
 use App\State;
 use App\Employee;
 use App\Department;
-use App\Division;
+use App\Designation;
 use Auth;
 use DB;
 class HomeController extends Controller
@@ -43,12 +43,12 @@ class HomeController extends Controller
 
          $emp=Employee::whereNull('deleted_at')->count();
         $dept=Department::whereNull('deleted_at')->count();
-        $Division=Division::whereNull('deleted_at')->count();
+        $Designation=Designation::whereNull('deleted_at')->count();
 
          $admin=Role::with('users')->whereIn('slug',$roles1)->count();
 
         
-        return view('home',compact('users','admin','emp','dept','Division'));
+        return view('home',compact('users','admin','emp','dept','Designation'));
     }
 
 
@@ -108,7 +108,7 @@ class HomeController extends Controller
         }
         else
         {
-            return redirect()->back()->with('message', 'Error!');
+            return redirect()->back()->with('error', 'Error!');
         }
 
     }

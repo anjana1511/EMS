@@ -1,3 +1,4 @@
+@if(Auth::user()->hasRole('admin'))
 @extends('layouts.app')
 @section('content')
 
@@ -66,7 +67,8 @@
                     </div>
                   </div>
                    <div class="row">
-                    <div class="update ml-auto mr-auto">                              <input type="submit" name="send" class="btn btn-info" value="Send" />
+                    <div class="update ml-auto mr-auto">                            
+                        <input type="submit" name="send" class="btn btn-info" value="Send" />
                             </div>
                     </form>
 @endsection                    
@@ -74,3 +76,4 @@
 <script type="text/javascript">
   bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
 </script>
+@endif

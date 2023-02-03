@@ -1,3 +1,4 @@
+@if(Auth::user()->hasRole('admin'))
 @extends('layouts.app')
 @section('content')
 <div class="content">
@@ -13,6 +14,12 @@
                     @if(session()->has('message'))
                         <script  type="application/javascript">
                         swal(" {{ session()->get('message') }}", "You clicked the button!", "success")
+                        </script>
+
+                    @endif
+                    @if(session()->has('error'))
+                        <script  type="application/javascript">
+                        swal(" {{ session()->get('error') }}", "You clicked the button!", "success")
                         </script>
 
                     @endif
@@ -292,3 +299,4 @@ $(document).on("click",".delete", function()
 
 </script>
 @endsection
+@endif

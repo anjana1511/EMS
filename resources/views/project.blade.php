@@ -2,6 +2,7 @@
 @section('content')
 <div class="content">
     <div class="row justify-content-center">
+    @if($role==true)
         <div class="col-md-10">
             <div class="card">
                 <div class="card-header">Project</div>
@@ -21,154 +22,157 @@
                         </script>
 
                     @endif
-    <form action="{{ route('store_project')}}" method="post">
-    {{ csrf_field() }}
-        <table align="center" width="80%">
-            <tr>
-                <td colspan="2" align="center">
-                <h4>Insert Project</h4>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                <hr>
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                    @endif
-                </td>
-            </tr>
-            <tr>
-               <td  width="20%">
-                   <label>Department Name</label>
-                   &nbsp; &nbsp;
-               </td>
-               <td>
-                  <select name="dept_name" id="dept_name" class="form-control">
-                  <option value="">Select Department</option>
-                  @foreach($deptdata as $item)
-                      <option value="{{ $item->dept_id }}">{{ $item->dept_name }}</option>
-                  @endforeach
-                  </select>
-                  
-               </td>
-            </tr>
-            <tr>
-                <td width="20%">
-                    <label>Project Name</label> 
-                    &nbsp; &nbsp;
-                </td>
-                <td> 
-                    <input type="text" class="form-control" name="pname" id="pname" placeholder="Project Name Here">
-                </td>
-            </tr>
-            <tr>
-                <td width="20%">
-                    <label>Project Details</label>
-                    &nbsp;&nbsp;
-                </td>
-                <td>
-                    <textarea class="form-control" name="pdetails" id="pdetails"></textarea>
-                </td>    
-            <tr>
-                <td colspan="2">
-                    <hr>
-                </td>
-            </tr>
-            <tr>
-            <td  colspan="2" align="center">
-            <input type="reset" class="btn btn-primary" name="back" value="Reset"></button>
-            <button type="submit" class="btn btn-primary">Submit</button>
-            </td>
-            </tr>
-        </table>
-    </form>
-  </div>
-</div>
 
-<div id="dataModal" class="modal fade">  
-      <div class="modal-dialog">  
-           <div class="modal-content">  
-                <div class="modal-header">  
-                     <h4 class="modal-title">Update Project</h4>  
+            <form action="{{ route('store_project')}}" method="post">
+            {{ csrf_field() }}
+                <table align="center" width="80%">
+                    <tr>
+                        <td colspan="2" align="center">
+                        <h4>Insert Project</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                        <hr>
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                            @endif
+                        </td>
+                    </tr>
+                    <tr>
+                    <td  width="20%">
+                        <label>Department Name</label>
+                        &nbsp; &nbsp;
+                    </td>
+                    <td>
+                        <select name="dept_name" id="dept_name" class="form-control">
+                        <option value="">Select Department</option>
+                        @foreach($deptdata as $item)
+                            <option value="{{ $item->dept_id }}">{{ $item->dept_name }}</option>
+                        @endforeach
+                        </select>
+                        
+                    </td>
+                    </tr>
+                    <tr>
+                        <td width="20%">
+                            <label>Project Name</label> 
+                            &nbsp; &nbsp;
+                        </td>
+                        <td> 
+                            <input type="text" class="form-control" name="pname" id="pname" placeholder="Project Name Here">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="20%">
+                            <label>Project Details</label>
+                            &nbsp;&nbsp;
+                        </td>
+                        <td>
+                            <textarea class="form-control" name="pdetails" id="pdetails"></textarea>
+                        </td>    
+                    <tr>
+                        <td colspan="2">
+                            <hr>
+                        </td>
+                    </tr>
+                    <tr>
+                    <td  colspan="2" align="center">
+                    <input type="reset" class="btn btn-primary" name="back" value="Reset"></button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    </td>
+                    </tr>
+                </table>
+            </form> 
+        </div>
+    </div> 
+
+            <div id="dataModal" class="modal fade">  
+                <div class="modal-dialog">  
+                    <div class="modal-content">  
+                            <div class="modal-header">  
+                                <h4 class="modal-title">Update Project</h4>  
+                            </div>  
+                            <form action="{{ route('edit_project')}}" method="post">
+                                {{ csrf_field() }}
+                            <div class="modal-body" id="project_detail">  
+                        
+                                    <table align="center" width="100%">
+                                        <tr>
+                                            <td width="20%">
+                                                <label>Department Name</label> 
+                                                &nbsp; &nbsp;
+                                            </td>
+                                            </tr>
+                                            <tr>
+                                            <td> 
+                                                <input type="hidden" class="form-control" name="edit_id" id="edit_id">
+                                                <select id="dept_id" name="dept_id" class="form-control">
+                                                @foreach($deptdata as $item)
+                                                <option value="{{ $item->dept_id }}">{{ $item->dept_name }}</option>
+                                                @endforeach
+                                                </select>                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td  width="20%">
+                                            <br>
+                                            <label>Project Name</label>
+                                            &nbsp; &nbsp;
+                                            </td>
+                                            </tr>
+                                            <tr>
+                                            <td>
+                                            <input type="text" class="form-control" name="epname" id="epname" placeholder="Project Name Here">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td  width="20%">
+                                            <br>
+                                            <label>Project Details</label>
+                                            &nbsp; &nbsp;
+                                            </td>
+                                            </tr>
+                                            <tr>
+                                            <td>
+                                            <textarea class="form-control" name="epdetails" id="epdetails" placeholder="Project Details Here"></textarea>
+                                            </td>
+                                        </tr>
+
+
+                                </table>
+
+                            </div>  
+                            <div class="modal-footer"> 
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                            </div>  
+                            </form>
+                    </div>  
                 </div>  
-                <form action="{{ route('edit_project')}}" method="post">
-                    {{ csrf_field() }}
-                <div class="modal-body" id="project_detail">  
-               
-                        <table align="center" width="100%">
-                            <tr>
-                                <td width="20%">
-                                    <label>Department Name</label> 
-                                    &nbsp; &nbsp;
-                                </td>
-								</tr>
-								<tr>
-                                <td> 
-                                    <input type="hidden" class="form-control" name="edit_id" id="edit_id">
-                                    <select id="dept_id" name="dept_id" class="form-control">
-                                    @foreach($deptdata as $item)
-                                    <option value="{{ $item->dept_id }}">{{ $item->dept_name }}</option>
-                                    @endforeach
-                                    </select>                
-                                </td>
-                            </tr>
-                            <tr>
-                                <td  width="20%">
-                                <br>
-                                   <label>Project Name</label>
-                                   &nbsp; &nbsp;
-                                </td>
-								</tr>
-								<tr>
-                                <td>
-                                <input type="text" class="form-control" name="epname" id="epname" placeholder="Project Name Here">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td  width="20%">
-                                <br>
-                                   <label>Project Details</label>
-                                   &nbsp; &nbsp;
-                                </td>
-								</tr>
-								<tr>
-                                <td>
-                                <textarea class="form-control" name="epdetails" id="epdetails" placeholder="Project Details Here"></textarea>
-                                </td>
-                            </tr>
-
-
+            </div> <!-- end model -->
+ @endif
+             <br />
+            <div class="table-responsive">
+                    <table id="user_table" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                    <td  align="center" width="5%"><b>ID</b></td>
+                                <td align="center"><b>Project Name</b></td>
+                                <td align="center"><b>Department</b></td>
+                                @if($role==true)<td align="center"><b>Action</b></td>@endif 
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
                     </table>
+            </div>
 
-                </div>  
-                <div class="modal-footer"> 
-                <button type="submit" class="btn btn-primary">Submit</button>
-                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
-                </div>  
-                </form>
-           </div>  
-      </div>  
- </div>
-<br />
-   <div class="table-responsive">
-    <table id="user_table" class="table table-bordered table-striped">
-     <thead>
-      <tr>
-       <td  align="center" width="5%"><b>ID</b></td>
-                <td align="center"><b>Project Name</b></td>
-                <td align="center"><b>Department</b></td>
-                @if($role==true)<td align="center"><b>Action</b></td>@endif 
-      </tr>
-     </thead>
-     <tbody></tbody>
-    </table>
-   </div>
         </div>
     </div>
 </div>
@@ -203,7 +207,7 @@ $(document).ready(function(){
                    "<td align='center'>" + (i+1) + "</td>" +
                    "<td align='center'>" + pname + "</td>" +
                    "<td align='center'>" + dept_id + "</td>"+
-                   "<td align='center'> @if($role==true)<input type='button' value='Update' class='update btn btn-info' data-id='"+hash_id+"' >||<input type='button' value='Delete' class='delete btn btn-danger' data-id='"+hash_id+"' > @endif</td>"+
+                   " @if($role==true)<td align='center'><input type='button' value='Update' class='update btn btn-info' data-id='"+hash_id+"' >||<input type='button' value='Delete' class='delete btn btn-danger' data-id='"+hash_id+"' ></td>@endif"+
                 
                "</tr>";
 

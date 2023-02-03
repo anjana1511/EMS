@@ -60,11 +60,11 @@
                     </div>
                     <div class="col-md-4 pl-1">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Division</label>
-                         <select name="divi" class="form-control">
-                            <option value="0">Select Division</option>
-                                  @foreach($division as $divi)
-                                     <option value="{{ $divi->id }}">{{ $divi->name }}</option>
+                        <label for="exampleInputEmail1">Designation</label>
+                         <select name="des" class="form-control">
+                            <option value="0">Select Designation</option>
+                                  @foreach($designation as $des)
+                                     <option value="{{ $des->id }}">{{ $des->name }}</option>
                                   @endforeach
                           </select>
                       </div>
@@ -83,18 +83,7 @@
                            <input type="text" class="form-control" id="Mono" name="Mono" value="{{ $data['Mono'] }}" />
                       </div>
                     </div>
-                     <div class="col-md-4 pl-1">
-                      <div class="form-group">
-                        <label>Salary:</label>
-                                       <select name="Salary" class="form-control">
-                        <option value="0">Select Salary</option>
-                           @foreach($salary as $amounts)
-                            <option value="{{ $amounts->id }}">{{ $amounts->amount }}</option>
-                           @endforeach
 
-                        </select>
-                      </div>
-                    </div>
                   </div>
                   <div class="row">
                     <div class="col-md-4 pr-1">

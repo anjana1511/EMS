@@ -120,21 +120,13 @@ Route::post('/store_dept','Department@store')->name('store_dept');
 Route::post('/edit_dept','Department@update')->name('edit_dept');
 Route::post('/deletedata_dept','Department@destroy')->name('deletedata_dept');
 
-//Manage Division
-Route::get('/division','DivisionController@index')->name('division');
-Route::get('/getdivi','DivisionController@show')->name('getdivi');
-Route::get('/getdatabyyid_divi','DivisionController@edit')->name('getdatabyid_divi');
-Route::post('/store_divi','DivisionController@store')->name('store_divi');
-Route::post('/edit_divi','DivisionController@update')->name('edit_divi');
-Route::post('/deletedata_divi','DivisionController@destroy')->name('deletedata_divi');
-
 //Manage Designation
-Route::get('/designation','DivisionController@index')->name('designation');
-Route::get('/getdes','DivisionController@show')->name('getdes');
-Route::get('/getdatabyyid_des','DivisionController@edit')->name('getdatabyid_des');
-Route::post('/store_des','DivisionController@store')->name('store_des');
-Route::post('/edit_des','DivisionController@update')->name('edit_des');
-Route::post('/deletedata_des','DivisionController@destroy')->name('deletedata_des');
+Route::get('/designation','DesignationController@index')->name('designation');
+Route::get('/getdes','DesignationController@show')->name('getdes');
+Route::get('/getdatabyyid_des','DesignationController@edit')->name('getdatabyid_des');
+Route::post('/store_des','DesignationController@store')->name('store_des');
+Route::post('/edit_des','DesignationController@update')->name('edit_des');
+Route::post('/deletedata_des','DesignationController@destroy')->name('deletedata_des');
 
 //Manage Salary
 Route::get('/salary','SalaryController@index')->name('salary');

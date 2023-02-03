@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 
 class DesignationController extends Controller
 {
+         /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,6 +25,9 @@ class DesignationController extends Controller
     public function index()
     {
         //
+        $designation = Designation::whereNull('deleted_at')->paginate(2);
+
+        return view('designation', compact('designation'));
     }
 
     /**
@@ -25,6 +38,7 @@ class DesignationController extends Controller
     public function create()
     {
         //
+
     }
 
     /**
@@ -36,6 +50,18 @@ class DesignationController extends Controller
     public function store(Request $request)
     {
         //
+        $inputArr=$request->all();
+        $hash_id= $hash_id=md5(uniqid(rand(), true));
+
+        //Validate
+          $request->validate([
+            'name' => 'required|min:2|alpha|unique:designation,name',
+          
+        ]);
+        
+        $task = Designation::create(['name' => $inputArr['name'],'hash_id'=>$hash_id]);
+        return redirect()->back()->with('message', 'Record Inserted!');
+    
     }
 
     /**
@@ -47,6 +73,9 @@ class DesignationController extends Controller
     public function show(Designation $designation)
     {
         //
+        $designation['data']=Designation::whereNull('deleted_at')->get();
+
+        return response()->json($designation);
     }
 
     /**
@@ -55,9 +84,12 @@ class DesignationController extends Controller
      * @param  \App\Designation  $designation
      * @return \Illuminate\Http\Response
      */
-    public function edit(Designation $designation)
+    public function edit(Request $request)
     {
         //
+        $inputArr=$request->all();
+        $editdata['data']=Designation::where('hash_id','=',$inputArr['edit_id'])->whereNull('deleted_at')->first();
+       return response()->json($editdata);
     }
 
     /**
@@ -70,6 +102,26 @@ class DesignationController extends Controller
     public function update(Request $request, Designation $designation)
     {
         //
+        $inputArr=$request->all();
+
+        $edit_id=$inputArr['edit_id'];
+        $name=$inputArr['ename'];
+                //Validate
+                $request->validate([
+                    'ename' => 'required|min:2|alpha',
+                  
+                ]);
+
+        $data=Designation::where('hash_id','=',$edit_id)->update(['name'=>$name]);
+
+        if($data)
+        {
+            return redirect()->back()->with('message', 'Record Updated!');
+        }
+        else
+        {
+            return redirect()->back()->with('error', 'Record Not Updated!');
+        }
     }
 
     /**
@@ -78,8 +130,15 @@ class DesignationController extends Controller
      * @param  \App\Designation  $designation
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Designation $designation)
+    public function destroy(Request $request)
     {
         //
+        $inputArr=$request->all();
+
+        $model = Designation::where('hash_id','=',$inputArr['id']);
+        
+        $model->delete();
+
+        return response()->json($inputArr['id']);
     }
 }

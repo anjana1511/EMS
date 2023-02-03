@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Salary;
 use Illuminate\Http\Request;
 use App\Employee;
+use App\Role;
 use DB;
 use App\Leavetype;
 use App\Empleave;
 use App\Advancepayment;
+use Auth;
+use User; 
 class SalaryController extends Controller
 {
         public function __construct()
@@ -22,6 +25,9 @@ class SalaryController extends Controller
      */
     public function index()
     {
+        $uid=Auth::user()->id;
+        $id=Auth::user();
+        $role =$id->hasRole('admin');
 
         $emp = Employee::whereNull('deleted_at')->get();
          $data = Salary::whereNull('deleted_at')->paginate(2);

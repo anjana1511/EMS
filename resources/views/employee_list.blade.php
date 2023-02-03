@@ -30,6 +30,8 @@
       <tr>
        <th>ID</th>
                 <th>Name</th>
+                <th>Profile</th>
+                <th>Contact No.</th>
                 <th>Joining Date</th>
                <th>Action</th>
       </tr>
@@ -39,6 +41,14 @@
          <tr>
           <td>{{ $data->emp_id }}</td>
           <td>{{ $data->firstname }}&nbsp; {{ $data->middlename }}</td>
+          <td>
+            @if($data->image == "")
+            <img src="{{asset('images/users/user.jpg') }}" alt="No Image Found" width="80px" height="80px">
+            @else
+            <img src="{{asset('images/users/').'/'. $data->image }}" alt="No Image Found" width="80px" height="80px">
+            @endif               
+          </td>
+          <td>{{ $data->Mono }}</td>
           <td>{{ $data->join_date }}</td>
           <td><a href="{{ route('editemp', $data->hash_id) }}"><input type='button' value='Update' class='update btn btn-info' ></a>
             ||<input type='button' value='Delete' class='delete btn btn-danger' data-id="{{ $data->hash_id }}">||<a href="{{ route('showemp', $data->hash_id) }}"><input type='button' value='Details' class='update btn btn-info' ></a></td>

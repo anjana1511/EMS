@@ -28,8 +28,7 @@ class CreateEmployeeTable extends Migration
             $table->date('dob');
             $table->date('join_date');
             $table->integer('dept');
-            $table->integer('divi_id');
-            $table->integer('salary');
+            $table->integer('des_id');
             $table->softDeletes();
             $table->timestamps();
         });

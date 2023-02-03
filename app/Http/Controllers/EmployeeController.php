@@ -7,12 +7,12 @@ use App\State;
 use App\District;
 use App\Taluka;
 use App\Village;
-use App\Salary;
 use App\Department;
-use App\Division;
+use App\Designation;
 use App\User;
 use App\Permission;
 use App\Role;
+use DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -27,10 +27,14 @@ class EmployeeController extends Controller
     {
         //
         $statedata=State::whereNull('deleted_at')->get();
-        $empdata=Employee::whereNull('deleted_at')->get();
-        $salary=Salary::whereNull('deleted_at')->get();
+        // $empdata=Employee::whereNull('deleted_at')->get();
+        $empdata=DB::table('employee')->select('employee.*','users.image')
+        ->join('users','users.email','=','employee.email')
+        ->whereNull('employee.deleted_at')->get();
+        
 
-        return view('employee_list',compact('statedata','empdata','salary'));
+
+        return view('employee_list',compact('statedata','empdata'));
     }
 
     /**
@@ -40,12 +44,11 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-          $statedata=State::whereNull('deleted_at')->get();
-        $salary=Salary::whereNull('deleted_at')->get();
+        $statedata=State::whereNull('deleted_at')->get();
         $dept=Department::whereNull('deleted_at')->get();
-        $division=Division::whereNull('deleted_at')->get();
+        $designation=Designation::whereNull('deleted_at')->get();
 
-          return view('add_employee',compact(['statedata','salary','dept','division']));
+          return view('add_employee',compact(['statedata','dept','designation']));
     }
 
     /**
@@ -81,12 +84,11 @@ class EmployeeController extends Controller
             'middlename'=>$inputArr['middlename'],
              'email'=>$inputArr['email'],
             'Mono'=>$inputArr['Mono'],
-            'salary'=>$inputArr['Salary'],
             'dept'=>$inputArr['dept'],
             'dob'=>$dob,
             'join_date'=>$join_date,
             'age'=>$inputArr['age'],
-            'divi_id'=>$inputArr['divi'],
+            'des_id'=>$inputArr['des'],
             'dept'=>$inputArr['dept'],
             'village_id'=>$inputArr['village_id'],
             'taluka_id'=>$inputArr['taluka_id'],
@@ -124,11 +126,10 @@ class EmployeeController extends Controller
         $distdata=District::whereNull('deleted_at')->where('dist_id','=',$data['dist_id'])->first();
         $talukadata=Taluka::whereNull('deleted_at')->where('taluka_id','=',$data['taluka_id'])->first();
         $citydata=Village::whereNull('deleted_at')->where('village_id','=',$data['village_id'])->first();
-        $salary=Salary::whereNull('deleted_at')->where('id','=',$data['salary'])->first();
         $dept=Department::whereNull('deleted_at')->where('dept_id','=',$data['dept'])->first();
-        $division=Division::whereNull('deleted_at')->where('id','=',$data['divi_id'])->first();
+        $designation=Designation::whereNull('deleted_at')->where('id','=',$data['des_id'])->first();
 
-          return view('employee_details',compact(['data','statedata','distdata','talukadata','citydata','salary','dept','division']));
+          return view('employee_details',compact(['data','statedata','distdata','talukadata','citydata','dept','designation']));
 
     }
 
@@ -145,12 +146,10 @@ class EmployeeController extends Controller
         // dd($data);
         $state_id=$data['state_id'];
         $statedata=State::whereNull('deleted_at')->get();
-        
-         $salary=Salary::whereNull('deleted_at')->get();
         $dept=Department::whereNull('deleted_at')->get();
-        $division=Division::whereNull('deleted_at')->get();
+        $designation=Designation::whereNull('deleted_at')->get();
 
-          return view('edit_employee',compact(['data','statedata','salary','dept','division']));
+          return view('edit_employee',compact(['data','statedata','dept','designation']));
 
    
     }
@@ -180,7 +179,6 @@ class EmployeeController extends Controller
             'middlename' => 'required|min:1',
             'email'=>'required',
             'Mono'=>'required',
-            'Salary' => 'required',
             'age' => 'required|min:1',
             'village_id' => 'required',
             'taluka_id' => 'required',
@@ -197,12 +195,11 @@ class EmployeeController extends Controller
             'middlename'=>$inputArr['middlename'],
             'email'=>$inputArr['email'],
             'Mono'=>$inputArr['Mono'],
-            'salary'=>$inputArr['Salary'],
             'dept'=>$inputArr['dept'],
             'dob'=>$dob,
             'join_date'=>$join_date,
             'age'=>$inputArr['age'],
-            'divi_id'=>$inputArr['divi'],
+            'des_id'=>$inputArr['des'],
             'dept'=>$inputArr['dept'],
             'village_id'=>$inputArr['village_id'],
             'taluka_id'=>$inputArr['taluka_id'],

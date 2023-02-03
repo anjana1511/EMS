@@ -1,3 +1,4 @@
+@if(Auth::user()->hasRole('admin'))
 @extends('layouts.app')
 @section('content')
 <div class="content">
@@ -52,3 +53,4 @@
      </div>
 </div>                    
 @endsection                    
+@endif

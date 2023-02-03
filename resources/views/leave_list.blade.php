@@ -109,32 +109,6 @@ $(document).on("click",".delete", function()
 
 });
 
-$(document).on("click", ".updatejj" , function() {
-    var edit_id = $(this).data('id');
-
-  $.ajax({
-    url: "{{ route('store_divi') }}",
-    type: 'get',
-    data: {_token: CSRF_TOKEN,edit_id: edit_id},
-    success: function(data){
-      console.log(data);
-     // states=data.statedata;
-    
-     //    //  $.each(states, function(key, value) {
-     //    //     //  console.log(value.state_id);
-     //    //                     $('select[name="state_id"]').append('<option value="'+ value.state_id +'">'+ value.state_name +'</option>');
-                        
-     //    //    });
-
-     //    $('#edit_id').val(data.distdata.hash_id);
-     //    $('#edist_name').val(data.distdata.district_name);  
-     //    $('#dataModal').modal('show'); 
-   
-    }
-  });
-
-
-});
 
 </script>
 @endsection

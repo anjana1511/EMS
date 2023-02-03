@@ -25,8 +25,8 @@
                     </div>
                     <div class="col-md-4 pl-1">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Division</label>
-                        <input type="text" name="divi" id="divi" class="form-control"value="{{ $division['name'] }}" readonly>
+                        <label for="exampleInputEmail1">Designation</label>
+                        <input type="text" name="des" id="des" class="form-control"value="{{ $designation['name'] }}" readonly>
                       </div>
                     </div>
                   </div>

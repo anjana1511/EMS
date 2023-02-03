@@ -4,7 +4,10 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
-                <div class="card-header"><button class="btn btn-danger" onClick="PrintDiv();"><i class="fa fa-print"></i> Print</button>
+                <div class="card-header">
+                    <button class="btn btn-danger" onClick="PrintDiv();"><i class="fa fa-print"></i> Print</button>
+                    <a href="{{ route('salarylist') }}" class="btn btn-md btn-danger">Back</a>
+
                 </div>
                 <div class="card-body">
                     @if (session('status'))
@@ -30,18 +33,18 @@
                     @foreach($data as $item)
                     <tr>
                         <td><strong>Name</strong></td>
-                        <td>{{$item->emp_name}}</td>
+                        <td>{{$item->firstname}}&nbsp;{{ $item->middlename}}</td>
                         <td><strong>DOB</strong></td>
-                        <td>23/02/xxxx</td>
+                        <td>{{$item->dob}}</td>
                     </tr>
                     <tr>
                         <td><strong>Address</strong></td>
-                        <td colspan="3">India</td>
+                        <td colspan="3">At.{{ $item->village_name }},Ta.{{ $item->taluka_name }},Dist.{{ $item->district_name }},{{ $item->state_name }}</td>
                     </tr>
                     <!------6 row---->
                     <tr>
                     <td><strong>Department</strong></td>
-                    <td>IT</td>
+                    <td>{{ $item->dept_name }}</td>
                     <td><strong>Designation</strong></td>
                     <td>Designer</td>
                     </tr>

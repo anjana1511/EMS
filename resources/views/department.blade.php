@@ -2,6 +2,7 @@
 @section('content')
       <div class="content">
     <div class="row justify-content-center">
+    @if(Auth::user()->hasRole('admin'))
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Department</div>
@@ -102,6 +103,7 @@
            </div>  
       </div>  
      </div>
+     @endif
      <br />
              <div class="table-responsive">
             <table id="user_table" class="table table-bordered table-striped">
@@ -109,7 +111,7 @@
             <tr>
             <td align="center" width="5%"><b>ID</b></td>
                         <td align="center"><b>Deartment</b></td>
-                        <td align="center"><b>Action</b></td>
+                        @if(Auth::user()->hasRole('admin')) <td align="center"><b>Action</b></td>@endif
             </tr>
             </thead>
             <tbody></tbody>
@@ -145,7 +147,7 @@ $.ajax({
                var tr_str = "<tr>" +
                    "<td align='center'>" + (i+1) + "</td>" +
                    "<td align='center'>" + dept_name + "</td>" +
-                   "<td align='center'><input type='button' value='Update' class='update btn btn-info' data-id='"+hash_id+"' ><input type='button' value='Delete' class='delete btn btn-danger' data-id='"+hash_id+"' ></td>"+
+                   "@if(Auth::user()->hasRole('admin'))<td align='center'><input type='button' value='Update' class='update btn btn-info' data-id='"+hash_id+"' ><input type='button' value='Delete' class='delete btn btn-danger' data-id='"+hash_id+"' ></td>@endif"+
                 
                "</tr>";
 

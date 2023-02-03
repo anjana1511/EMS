@@ -27,6 +27,7 @@
                             <th>Employee</th>
                             <th>Gross Salary</th>
                             <th>Tax</th>
+                            <th>Leaves</th>
                             <th>Advancepayment</th> 
                             <th>Action</th>
                 </tr>
@@ -38,7 +39,8 @@
                             <td>{{ $data->firstname}}</td>
                             <td>{{ $data->gross_salary}}</td>
                             <td>{{ $data->tax}}</td>
-                            <td>{{ $data->s_id}}</td>
+                            <td>{{ $data->total_leave }}</td>
+                            <td>{{ $data->total}}</td>
                             <td><a href="{{ route('generate_slip', $data->s_id) }}"><img src='{{ asset('assets/img/print.png') }}' height='30' width='30' /></a></td>
 
                 </tr>

@@ -91,9 +91,9 @@
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
-                      <p class="card-category">Division</p>
+                      <p class="card-category">Designation</p>
                       <p class="card-title">
-                        <p>{{ $Division }}</p>
+                        <p>{{ $Designation }}</p>
                     </div>
                   </div>
                 </div>

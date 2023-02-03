@@ -24,9 +24,11 @@ class ManagesalaryController extends Controller
     public function index()
     {
         //
-        $users = Employee::all();
-    
-        // return view('admin.managesalary.index',compact('users'));
+        // $users = Employee::all();
+    $users=DB::table('employee')
+    ->join('salary','salary.emp_id','=','employee.emp_id')
+    ->groupBy('employee.firstname')
+    ->get();   
         return view('managesalary.index',compact('users'));
     }
 
@@ -63,10 +65,27 @@ class ManagesalaryController extends Controller
 
     public function generate_slip($id)
     {
-        // $data= $id;
-         $data = Managesalary::where('id','=',$id)->get();
-        //  dd($data);
-        //  return view ('managesalary.generate_slip', compact('data'))->render();
+
+        $data = DB::table('manage_salary')
+        ->select('manage_salary.*','employee.firstname','employee.middlename','employee.dob',
+        'village.village_name','talukas.taluka_name','districts.district_name','states.state_name'
+        ,'department.dept_name')
+        ->join('employee', function($join) {
+            $join->on('employee.emp_id','=', 'manage_salary.emp_id');
+        })->where('manage_salary.id','=',$id)
+        ->leftJoin('village', function($join){
+            $join->on('village.village_id','=','employee.village_id');
+        })->leftJoin('talukas', function($join){
+            $join->on('talukas.taluka_id','=','employee.taluka_id');
+        })->leftJoin('districts', function($join){
+            $join->on('districts.dist_id','=','employee.dist_id');
+        })->leftJoin('states', function($join){
+            $join->on('states.state_id','=','employee.state_id');
+        })->leftJoin('department', function($join){
+            $join->on('department.dept_id','=','employee.dept');
+        })
+        ->groupBy('employee.firstname')
+        ->get();
         return view('managesalary.generate_slip',compact('data'));
     }
     /**
@@ -150,14 +169,14 @@ class ManagesalaryController extends Controller
     {
 
         $salaryData = DB::table('employee')
-        ->select('employee.firstname','employee.dob','manage_salary.id as s_id','salary.*','advance_payment.amount',DB::raw("SUM(advance_payment.amount) as total"))
+        ->select('employee.firstname','employee.dob','manage_salary.total_leave','manage_salary.id as s_id','salary.*','advance_payment.amount',DB::raw("SUM(advance_payment.amount) as total"))
         ->join('salary', function($join) {
             $join->on('salary.emp_id','=', 'employee.emp_id');
         })
         ->leftJoin('advance_payment', function($join) {
             $join->on('advance_payment.emp_id','=', 'employee.emp_id');
           
-        })->leftjoin('manage_salary',function($join){
+        })->join('manage_salary',function($join){
             $join->on('manage_salary.emp_id','=','employee.emp_id');
         })
         ->groupBy('employee.firstname')

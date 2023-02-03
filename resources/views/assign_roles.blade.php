@@ -1,3 +1,4 @@
+@if(Auth::user()->hasRole('admin'))
 @extends('layouts.app')
 @section('content')
 <div class="content">
@@ -201,3 +202,4 @@ $(document).on("click",".delete", function()
 
 </script>
 @endsection
+@endif

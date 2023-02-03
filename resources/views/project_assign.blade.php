@@ -2,6 +2,7 @@
 @section('content')
 <div class="content">
     <div class="row justify-content-center">
+    @if(Auth::user()->hasRole('admin'))
         <div class="col-md-10">
             <div class="card">
                 <div class="card-header">Assign Project</div>
@@ -161,6 +162,7 @@
            </div>  
       </div>  
  </div>
+ @endif
 <br />
    <div class="table-responsive">
     <table id="user_table" class="table table-bordered table-striped">
@@ -215,7 +217,7 @@ $(document).ready(function(){
                    "<td align='center'>" + ename1 +" " + ename2 + "</td>" +
                    "<td align='center'>" + pname + "</td>" +
                    "<td align='center'>" + dept_id + "</td>"+
-                   "<td align='center'> @if($role==true)<input type='button' value='Delete' class='delete btn btn-danger' data-id='"+hash_id+"' > @endif</td>"+
+                   "@if(Auth::user()->hasRole('admin'))<td align='center'><input type='button' value='Delete' class='delete btn btn-danger' data-id='"+hash_id+"' ></td>@endif"+
                 
                "</tr>";
 

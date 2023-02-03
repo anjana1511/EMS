@@ -2,6 +2,7 @@
 @section('content')
       <div class="content">
     <div class="row justify-content-center">
+    @if(Auth::user()->hasRole('admin'))
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Designation</div>
@@ -21,7 +22,13 @@
                         </script>
 
                     @endif
-    <form action="{{ route('store_divi')}}" method="post">
+                    @if(session()->has('error'))
+                        <script  type="application/javascript">
+                        swal(" {{ session()->get('error') }}", "You clicked the button!", "error")
+                        </script>
+
+                    @endif
+    <form action="{{ route('store_des')}}" method="post">
     {{ csrf_field() }}
         <table align="center" width="80%">
             <tr>
@@ -75,7 +82,7 @@
                 <div class="modal-header">  
                      <h4 class="modal-title">Update Designation</h4>  
                 </div>  
-                <form action="{{ route('edit_divi')}}" method="post">
+                <form action="{{ route('edit_des')}}" method="post">
                     {{ csrf_field() }}
                 <div class="modal-body" id="employee_detail">  
                
@@ -102,14 +109,17 @@
            </div>  
       </div>  
      </div>
+     @endif
      <br />
              <div class="table-responsive">
             <table id="user_table" class="table table-bordered table-striped">
             <thead>
             <tr>
             <td align="center" width="5%"><b>ID</b></td>
-                        <td align="center"><b>Deartment</b></td>
+                        <td align="center"><b>Designation</b></td>
+                        @if(Auth::user()->hasRole('admin'))
                         <td align="center"><b>Action</b></td>
+                        @endif
             </tr>
             </thead>
             <tbody></tbody>
@@ -125,7 +135,7 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 $(document).ready(function(){
    
 $.ajax({
-     url: "{{ route('getdivi') }}",
+     url: "{{ route('getdes') }}",
    
     success: function(response){
  console.log(response['data']);
@@ -145,7 +155,7 @@ $.ajax({
                var tr_str = "<tr>" +
                    "<td align='center'>" + (i+1) + "</td>" +
                    "<td align='center'>" + name + "</td>" +
-                   "<td align='center'><input type='button' value='Update' class='update btn btn-info' data-id='"+hash_id+"' ><input type='button' value='Delete' class='delete btn btn-danger' data-id='"+hash_id+"' ></td>"+
+                   "@if(Auth::user()->hasRole('admin'))<td align='center'><input type='button' value='Update' class='update btn btn-info' data-id='"+hash_id+"' ><input type='button' value='Delete' class='delete btn btn-danger' data-id='"+hash_id+"' ></td> @endif"+
                 
                "</tr>";
 
@@ -174,10 +184,11 @@ $(document).on("click", ".update" , function() {
     var edit_id = $(this).data('id');
 
   $.ajax({
-    url: "{{ route('getdatabyid_divi') }}",
+    url: "{{ route('getdatabyid_des') }}",
     type: 'get',
     data: {_token: CSRF_TOKEN,edit_id: edit_id},
     success: function(response){
+        console.log(response.data);
 
         $('#edit_id').val(response.data.hash_id);
         $('#ename').val(response.data.name);  
@@ -206,7 +217,7 @@ $(document).on("click",".delete", function()
             if (isConfirm) {
                 
                 $.ajax({
-                url: "{{ route('deletedata_divi') }}",
+                url: "{{ route('deletedata_des') }}",
                 type: 'post',
                 data: {_token: CSRF_TOKEN,id: id},
                 success: function(response){
