@@ -302,4 +302,4 @@ $(document).on("click",".delete", function()
 // }
 </script>
 @endsection
-@if(Auth::user()->hasRole('admin'))
+@endif
