@@ -147,24 +147,6 @@ class ManagesalaryController extends Controller
 
         return view('managesalary.details',compact('leave_pay','id','total','net_salary','amt','username','advance','advancePayment','total_leaves'));
     }
-    public function salarylistfun()
-    {
-       $salaryData['data'] = DB::table('employee')
-    ->select('employee.firstname','manage_salary.id as s_id','salary.*','advance_payment.amount',DB::raw("SUM(advance_payment.amount) as total"))
-    ->join('salary', function($join) {
-        $join->on('salary.emp_id','=', 'employee.emp_id');
-    })
-    ->leftJoin('advance_payment', function($join) {
-        $join->on('advance_payment.emp_id','=', 'employee.emp_id');
-      
-    })->leftjoin('manage_salary',function($join){
-        $join->on('manage_salary.emp_id','=','employee.emp_id');
-    })
-    ->groupBy('employee.firstname')
-    ->get();
-     return response()->json($salaryData);
-
-    }
     public function salarylist()
     {
 

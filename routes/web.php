@@ -139,7 +139,6 @@ Route::post('/deletedata_salary','SalaryController@destroy')->name('deletedata_s
 Route::get('managesalary','ManagesalaryController@index')->name('managesalary');
 Route::post('managesalary/detail/','ManagesalaryController@show')->name('show');
 Route::get('managesalary/salarylist','ManagesalaryController@salarylist')->name('salarylist');
-Route::get('managesalary/salarylistfun','ManagesalaryController@salarylistfun')->name('salarylistfun');
 
 // Route::get('managesalary/generate_slip','ManagesalaryController@generate_slip')->name('generate_slip');
 Route::get('managesalary/generate_slip/{id}','ManagesalaryController@generate_slip')->name('generate_slip');
