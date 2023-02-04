@@ -46,21 +46,21 @@ class DatabaseSeeder extends Seeder
 		$manager_perm = Permission::where('slug','edit-users')->first();
 
 		$developer = new User();
-		$developer->name = 'Rahul';
-		$developer->email = 'rahul@gmail.com';
-		$developer->password = bcrypt('secrettt');
+		$developer->name = 'Admin';
+		$developer->email = 'admin@gmail.com';
+		$developer->password = bcrypt('123456789');
 		$developer->save();
 		$developer->roles()->attach($dev_role);
 		$developer->permissions()->attach($dev_perm);  //roles_permissions
 
+	
 		$manager = new User();
-		$manager->name = 'Ashish';
-		$manager->email = 'ashish@gmail.com';
-		$manager->password = bcrypt('secrettt');
+		$manager->name = 'User';
+		$manager->email = 'user@gmail.com';
+		$manager->password = bcrypt('123456789');
 		$manager->save();
 		$manager->roles()->attach($manager_role);
 		$manager->permissions()->attach($manager_perm);
-
 		
     }
 }
