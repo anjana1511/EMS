@@ -1,39 +1,44 @@
-<h1>Employee Management System</h1>
-<br>
-<p>Employee Management System is a laravel based application.This is simple yet really educational for learning purpose. So, student who are new to laravel can use this program as learning guide.
-</p>
-<p>
-This application maintains the details of employee in the organization.The CRUD operation can be done here.
-</p>
-<h2>Project Requirements:</h2>
- <table>
-     <tr>
-        <th>Programs</th>
-        <th>Function</th>
-        <th>Versions</th>
-    </tr>
-    <tr>
-        <td>PHP</td>
-        <td>Language</td>
-        <td>^7.2.5</td>
-    </tr>
-    <tr>
-        <td>Wamp,Xampp</td>
-        <td>Server</td>
-        <td>*</td>
-    </tr>
-    <tr>
-        <td>Laravel</td>
-        <td>Framework</td>
-        <td>^7.0</td>
-    </tr>
-     <tr>
-        <td>MYSQL</td>
-        <td>-</td>
-        <td>5.7.31 *</td>
-    </tr>
-</table>
-<h2>Steps for installation of system:</h2>
+# Employee Management System (Laravel)
+
+This is an **Employee Management System** built using **Laravel**. The system allows **Admin** users to manage employees, roles, locations, salaries, projects, and more, while **Employee** users can view their own details, salary information, assigned tasks, and apply for leave.
+
+## Features
+
+### Admin Panel:
+- **Location Management**: Manage location hierarchy (State, District, Taluka, Village).
+- **Role & Permission Management**: Create, update, delete roles and permissions, and assign them to employees.
+- **Employee Management**: Manage employee profiles, assign designations and departments.
+- **Salary Management**: Manage employee salaries (CRUD operations).
+- **Advance Payment Management**: Manage employee advance payments.
+- **Project & Task Management**: Create, update, and assign projects and tasks to employees.
+- **Leave Management**: Approve, reject, or mark leave requests as pending.
+- **Communication**: Send emails to employees for leave approvals, task updates, etc.
+
+### Employee Panel:
+- **View Profile**: Employees can view their assigned designation and department.
+- **Salary Overview**: View and print their salary details.
+- **Assigned Projects/Tasks**: View assigned projects and tasks.
+- **Leave Management**: Apply for leave and view leave status.
+
+## Tech Stack
+- **Backend**: Laravel
+- **Frontend**: Blade templates (can be extended with Vue.js or React)
+- **Authentication**: Laravel Breeze or Jetstream
+- **Database**: MySQL or other relational databases
+## Project Requirements
+
+| **Programs** | **Function** | **Versions** |
+|--------------|--------------|--------------|
+| PHP          | Language     | ^7.2.5       |
+| Wamp/Xampp   | Server       | *            |
+| Laravel      | Framework    | ^7.0         |
+| MySQL        | Database     | 5.7.31 *     |
+## Installation
+
+Follow these steps to set up the project locally.
+
+### 1. Clone the repository
+```bash
 <p>
 git clone https://github.com/anjana1511/EMS.git EMS
 <br>
@@ -49,6 +54,8 @@ php artisan key:generate
 php artisan serve
 <br>
 </p>
+
+```
 <h2>Candidate Login</h2>
 <b>Admin Login:</b>admin@gmail.com &nbsp; <b>Password:</b>123456789 <br>
 <b>user Login:</b>user@gmail.com &nbsp;<b>Password:</b>123456789
